@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site Collab - Keanucheese</title>
+  <style>
+    :root {
+      --bg: #04182f;
+      --panel: #d8d8d8;
+      --panel-dark: #8b8b8b;
+      --panel-light: #f6f6f6;
+      --ink: #111;
+      --brand: #001f7a;
+      --brand2: #1488cc;
+      --accent: #ffcc00;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: "Times New Roman", Times, serif;
+      color: var(--ink);
+      background:
+        linear-gradient(transparent 96%, rgba(255,255,255,.08) 97%),
+        url("desktop-wallpaper-classic-computer-on-dog-windows-classic.jpg") center/cover fixed;
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .12;
+      background-image: radial-gradient(#ffffff 1px, transparent 1px);
+      background-size: 4px 4px;
+    }
+
+    .window {
+      width: min(980px, 94vw);
+      margin: 24px auto;
+      border: 3px solid;
+      border-color: var(--panel-light) var(--panel-dark) var(--panel-dark) var(--panel-light);
+      background: var(--panel);
+      box-shadow: 0 0 0 2px #000;
+      position: relative;
+      z-index: 2;
+    }
+
+    .titlebar {
+      background: linear-gradient(90deg, var(--brand), var(--brand2));
+      color: #fff;
+      padding: 8px 12px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      letter-spacing: .5px;
+    }
+
+    .titlebar .buttons span {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      margin-left: 4px;
+      border: 2px solid;
+      border-color: var(--panel-light) var(--panel-dark) var(--panel-dark) var(--panel-light);
+      background: var(--panel);
+    }
+
+    .content {
+      padding: 16px;
+      border-top: 2px solid #000;
+      background: rgba(255,255,255,.84);
+    }
+
+    .lang-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .lang-row label {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    select {
+      font-family: inherit;
+      font-size: 16px;
+      border: 2px inset #bbb;
+      padding: 4px 8px;
+      background: #fffef5;
+    }
+
+    .marquee {
+      margin: 10px 0;
+      border: 2px dashed #000;
+      background: #fff8c4;
+      padding: 6px;
+      font-weight: bold;
+      color: #4a2f00;
+    }
+
+    h1 {
+      margin: 8px 0;
+      font-size: clamp(28px, 4vw, 42px);
+      text-shadow: 2px 2px 0 #fff;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 120px 1fr 120px;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .hero img {
+      width: 100%;
+      border: 2px solid #000;
+      background: #fff;
+      image-rendering: pixelated;
+    }
+
+    .intro {
+      font-size: 20px;
+      line-height: 1.35;
+      background: #fff;
+      border: 2px solid #000;
+      padding: 10px;
+    }
+
+    .invite {
+      margin-top: 10px;
+      font-size: 19px;
+      color: #102d89;
+      font-weight: bold;
+    }
+
+    .block {
+      margin-top: 14px;
+      border: 2px ridge #aaa;
+      background: #f9f9f9;
+      padding: 10px;
+    }
+
+    .block h2 {
+      margin: 0 0 8px;
+      font-size: 24px;
+      color: #8b0000;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 20px;
+    }
+
+    li { margin: 6px 0; }
+
+    a {
+      color: #003399;
+      font-weight: bold;
+    }
+
+    .footer {
+      margin-top: 16px;
+      padding-top: 10px;
+      border-top: 2px dotted #000;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero img { max-width: 130px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <main class="window">
+    <div class="titlebar">
+      <span>SITE_COLLAB.EXE - Timesheets Magazine London Interactive 90s Design</span>
+      <div class="buttons"><span></span><span></span><span></span></div>
+    </div>
+
+    <section class="content">
+      <div class="lang-row">
+        <label for="lang">Idioma / Language / Idioma:</label>
+        <select id="lang">
+          <option value="es">Español</option>
+          <option value="en">English</option>
+          <option value="pt">Português</option>
+        </select>
+      </div>
+
+      <div class="marquee"><marquee behavior="alternate" scrollamount="5" id="ticker"></marquee></div>
+
+      <h1 id="hello"></h1>
+
+      <div class="hero">
+        <img src="kean_wallride.gif" alt="Skater gif" />
+        <div class="intro">
+          <div id="bio"></div>
+          <div class="invite" id="invite"></div>
+        </div>
+        <img src="kean_5050drop.gif" alt="Skateboarding gif" />
+      </div>
+
+      <div class="block">
+        <h2 id="servicesTitle"></h2>
+        <ul id="servicesList"></ul>
+      </div>
+
+      <div class="block">
+        <h2 id="collabsTitle"></h2>
+        <ul>
+          <li><a href="https://www.etsy.com/shop/LootApparelBoutique" target="_blank" rel="noopener noreferrer">Loot Apparel Boutique</a> — <span id="c1"></span></li>
+          <li><a href="https://amazonicwav.tumblr.com/" target="_blank" rel="noopener noreferrer">AmazoNic Wav</a> — <span id="c2"></span></li>
+          <li><a href="https://nexusgenesis.odooconsultores.cl/recepcion" target="_blank" rel="noopener noreferrer">Nexus Genesis / Recepción</a> — <span id="c3"></span></li>
+          <li><a href="https://nexusgenesis.odooconsultores.cl/tematicas" target="_blank" rel="noopener noreferrer">Nexus Genesis / Temáticas</a> — <span id="c4"></span></li>
+          <li>Wizards SK8 — <span id="c5"></span></li>
+        </ul>
+      </div>
+
+      <div class="footer" id="footer"></div>
+    </section>
+  </main>
+
+  <script>
+    const i18n = {
+      es: {
+        ticker: 'COLLAB STATION 199X :: INNOVACIÓN + WEB3 + ARTE + CULTURA + EVENTOS',
+        hello: '¡Hola mundo!',
+        bio: 'Soy keanucheese, un polímata moderno — chef, poeta y skater en la vida real.',
+        invite: 'Te invito a colaborar en proyectos de innovación, web3, arte, cultura y eventos.',
+        servicesTitle: 'Ver servicios',
+        services: ['Webs', 'Servidores de Discord', 'Investigación e innovación', 'Arte & Diseño'],
+        collabsTitle: 'Estas son las collabs realizadas',
+        c1: 'research and design | USA',
+        c2: 'experiencia de usuario y video | worldwide',
+        c3: 'comunidad IRL | Neo-Medieval',
+        c4: 'comunidad IRL/URL e innovación | Solarpunk',
+        c5: 'comunidad IRL | Skateboarding',
+        footer: '© 199X-20XX Keanucheese Creative Executive Network'
+      },
+      en: {
+        ticker: 'COLLAB STATION 199X :: INNOVATION + WEB3 + ART + CULTURE + EVENTS',
+        hello: 'Hello world!',
+        bio: 'I am keanucheese, a modern polymath — chef, poet, and skater in real life.',
+        invite: 'I invite you to collaborate on projects in innovation, web3, art, culture, and events.',
+        servicesTitle: 'View services',
+        services: ['Webs', 'Discord servers', 'Research innovation', 'Art & Design'],
+        collabsTitle: 'These are the collabs delivered',
+        c1: 'research and design | USA',
+        c2: 'user experience and video | worldwide',
+        c3: 'IRL community | Neo-Medieval',
+        c4: 'IRL/URL community and innovation | Solarpunk',
+        c5: 'IRL community | Skateboarding',
+        footer: '© 199X-20XX Keanucheese Creative Executive Network'
+      },
+      pt: {
+        ticker: 'COLLAB STATION 199X :: INOVAÇÃO + WEB3 + ARTE + CULTURA + EVENTOS',
+        hello: 'Olá mundo!',
+        bio: 'Sou keanucheese, um polímata moderno — chef, poeta e skatista na vida real.',
+        invite: 'Convido você para colaborar em projetos de inovação, web3, arte, cultura e eventos.',
+        servicesTitle: 'Ver serviços',
+        services: ['Webs', 'Servidores de Discord', 'Pesquisa e inovação', 'Arte & Design'],
+        collabsTitle: 'Estas são as collabs realizadas',
+        c1: 'pesquisa e design | USA',
+        c2: 'experiência do usuário e vídeo | worldwide',
+        c3: 'comunidade IRL | Neo-Medieval',
+        c4: 'comunidade IRL/URL e inovação | Solarpunk',
+        c5: 'comunidade IRL | Skateboarding',
+        footer: '© 199X-20XX Keanucheese Creative Executive Network'
+      }
+    };
+
+    const langEl = document.getElementById('lang');
+    const fields = ['ticker','hello','bio','invite','servicesTitle','collabsTitle','c1','c2','c3','c4','c5','footer'];
+
+    function render(lang) {
+      const t = i18n[lang] || i18n.es;
+      fields.forEach(id => { document.getElementById(id).textContent = t[id]; });
+
+      const list = document.getElementById('servicesList');
+      list.innerHTML = '';
+      t.services.forEach(service => {
+        const li = document.createElement('li');
+        li.textContent = service;
+        list.appendChild(li);
+      });
+      document.documentElement.lang = lang;
+    }
+
+    langEl.addEventListener('change', e => render(e.target.value));
+    render('es');
+  </script>
+</body>
+</html>
