@@ -688,8 +688,20 @@ function spawnTrail(x,y){
   trailLayer.appendChild(img); while(trailLayer.children.length>TRAIL_MAX) trailLayer.firstChild.remove();
 }
 window.addEventListener("mousemove", e=>{ if(intro.style.display==='none') return; cta.style.left=e.clientX+"px"; cta.style.top=e.clientY+"px"; cta.classList.add("on"); if(trailEnabled) spawnTrail(e.clientX,e.clientY); },{passive:true});
+window.addEventListener("touchmove", e=>{ if(intro.style.display==='none'||!trailEnabled) return; const t=e.touches&&e.touches[0]; if(!t) return; spawnTrail(t.clientX,t.clientY); },{passive:true});
 
 const audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+
+function resumeAudioOnce(){
+  if(audioCtx.state !== 'running'){
+    audioCtx.resume().catch(()=>{});
+  }
+  window.removeEventListener('pointerdown', resumeAudioOnce);
+  window.removeEventListener('keydown', resumeAudioOnce);
+}
+window.addEventListener('pointerdown', resumeAudioOnce, {once:true});
+window.addEventListener('keydown', resumeAudioOnce, {once:true});
+
 function beep(type){
   const map={open:[620,.03],close:[330,.04],error:[160,.08],min:[250,.04]};
   const [freq,dur]=map[type]||map.open;
@@ -712,7 +724,7 @@ setInterval(()=>document.getElementById('clock2').textContent=new Intl.DateTimeF
 function normalizeEmbed(url){
   if(url.includes('youtube.com/watch')){const u=new URL(url);const v=u.searchParams.get('v');return `https://www.youtube-nocookie.com/embed/${v}?autoplay=1`;}
   if(url.includes('youtu.be/')){const v=url.split('youtu.be/')[1].split('?')[0];return `https://www.youtube-nocookie.com/embed/${v}?autoplay=1`;}
-  if(url.includes('odysee.com/')){return url.replace('odysee.com/','odysee.com/$/embed/');}
+  if(url.includes('odysee.com/')){ const u=url.replace('odysee.com/','odysee.com/$/embed/'); return u.includes('?')?u+'&autoplay=true':u+'?autoplay=true'; }
   return url;
 }
 
@@ -834,7 +846,8 @@ startMenu.addEventListener('click',e=>{
 function hideNoise(){
   [...document.querySelectorAll('a,button,div')].forEach(el=>{const t=(el.textContent||'').toLowerCase(); const h=(el.getAttribute('href')||'').toLowerCase(); if(t.includes('triunvirato')||h.includes('instagram.com/triunvirato')) el.style.display='none'; if(t.includes('odoo')&&t.includes('error de cliente')) el.style.display='none'; if(t.includes('cookies')) el.style.display='none';});
 }
-setInterval(hideNoise,1000);
+hideNoise();
+new MutationObserver(hideNoise).observe(document.body,{childList:true,subtree:true});
 
 openApp('documents');
 window.KEANU_OPEN=(id)=>openApp(id);
