@@ -594,9 +594,9 @@
     <div id="introCard" class="introCard" tabindex="0" role="button" aria-label="Continue">
       <img id="introImg" alt="Continue window" />
     </div>
+    <div class="introFooter">Made with love by Keanucheese</div>
   </div>
 
-  <div class="introFooter">Made with love by Keanucheese</div>
   <div id="cta" class="cta">CLICK TO CONTINUE</div>
 
   <!-- OS -->
@@ -667,7 +667,12 @@ const TRAIL_GIFS = [
   "https://media.giphy.com/media/lUZeKq81VSmc6ifBEM/giphy.gif",
   "https://media.giphy.com/media/YOSwXpWj4SV7jBK0mp/giphy.gif",
   "https://raw.githubusercontent.com/KeanuCheese/Theme-K/a1eb6484394fc2ee14767d4c9be39508fc3a607d/block.jpg",
-  "https://raw.githubusercontent.com/KeanuCheese/Theme-K/d4dafe9271194126ed59309f61e3baa85b95dbd5/Ghost-Machine-_28999.jpg"
+  "https://raw.githubusercontent.com/KeanuCheese/Theme-K/d4dafe9271194126ed59309f61e3baa85b95dbd5/Ghost-Machine-_28999.jpg",
+  "https://raw.githubusercontent.com/KeanuCheese/Theme-K/d4dafe9271194126ed59309f61e3baa85b95dbd5/Ghost-Machine-_48454.jpg",
+  "https://raw.githubusercontent.com/KeanuCheese/Theme-K/d4dafe9271194126ed59309f61e3baa85b95dbd5/Solidarity%20for%20Suckers.png",
+  "https://raw.githubusercontent.com/KeanuCheese/Theme-K/d4dafe9271194126ed59309f61e3baa85b95dbd5/The%20slice%20of%20the%20force.png",
+  "https://media.giphy.com/media/JTPiXVVJKKxaBy3pEs/giphy.gif",
+  "https://media.giphy.com/media/s5WPOoRDh5jrTJapJq/giphy.gif"
 ];
 let bag=[], last="";
 const refill=()=>{bag=[...TRAIL_GIFS].sort(()=>Math.random()-.5)};
@@ -816,6 +821,7 @@ startMenu.addEventListener('click',e=>{
     intro.classList.remove('introFadeOut');
     intro.style.display='flex';
     cta.style.display='block';
+    cta.classList.remove('on');
     return;
   }
   if(it.dataset.external==='1'){window.open(it.dataset.link,'_blank','noopener'); toggleStart(false); return;}
