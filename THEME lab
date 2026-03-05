@@ -690,9 +690,11 @@ function spawnTrail(x,y){
 window.addEventListener("mousemove", e=>{ if(intro.style.display==='none') return; cta.style.left=e.clientX+"px"; cta.style.top=e.clientY+"px"; cta.classList.add("on"); if(trailEnabled) spawnTrail(e.clientX,e.clientY); },{passive:true});
 window.addEventListener("touchmove", e=>{ if(intro.style.display==='none'||!trailEnabled) return; const t=e.touches&&e.touches[0]; if(!t) return; spawnTrail(t.clientX,t.clientY); },{passive:true});
 
-const audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+let audioCtx = null;
+try{ audioCtx = new (window.AudioContext||window.webkitAudioContext)(); }catch(_){ audioCtx = null; }
 
 function resumeAudioOnce(){
+  if(!audioCtx) return;
   if(audioCtx.state !== 'running'){
     audioCtx.resume().catch(()=>{});
   }
@@ -703,6 +705,7 @@ window.addEventListener('pointerdown', resumeAudioOnce, {once:true});
 window.addEventListener('keydown', resumeAudioOnce, {once:true});
 
 function beep(type){
+  if(!audioCtx) return;
   const map={open:[620,.03],close:[330,.04],error:[160,.08],min:[250,.04]};
   const [freq,dur]=map[type]||map.open;
   const o=audioCtx.createOscillator(), g=audioCtx.createGain();
@@ -722,7 +725,7 @@ introCard.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.prev
 setInterval(()=>document.getElementById('clock2').textContent=new Intl.DateTimeFormat('es-CL',{timeZone:'America/Santiago',hour:'2-digit',minute:'2-digit',year:'numeric',month:'2-digit',day:'2-digit',hour12:false}).format(new Date()),1000);
 
 function normalizeEmbed(url){
-  if(url.includes('youtube.com/watch')){const u=new URL(url);const v=u.searchParams.get('v');return `https://www.youtube-nocookie.com/embed/${v}?autoplay=1`;}
+  if(url.includes('youtube.com/watch')){const u=new URL(url);const v=u.searchParams.get('v'); if(v) return `https://www.youtube-nocookie.com/embed/${v}?autoplay=1`; return url;}
   if(url.includes('youtu.be/')){const v=url.split('youtu.be/')[1].split('?')[0];return `https://www.youtube-nocookie.com/embed/${v}?autoplay=1`;}
   if(url.includes('odysee.com/')){ const u=url.replace('odysee.com/','odysee.com/$/embed/'); return u.includes('?')?u+'&autoplay=true':u+'?autoplay=true'; }
   return url;
@@ -786,7 +789,10 @@ function buildWindow(id){
     const execRun=()=>{
       const q=(input.value||'').trim();
       if(!q){ beep('error'); return; }
-      if(ITEMS[q]){ openApp(q); return; }
+      const alias={docs:'documents',documentos:'documents',media:'multimedia',calc:'calculator'};
+      const key=alias[q.toLowerCase()]||q;
+      if(key==='discord'){ window.open('https://discord.com/users/849764011670110250','_blank','noopener'); return; }
+      if(ITEMS[key]){ openApp(key); return; }
       if(/^https?:\/\//i.test(q)){
         const id='link_'+btoa(q).replace(/=/g,'');
         ITEMS[id]={title:q.slice(0,38),icon:'🌐',type:'web',url:q};
@@ -849,7 +855,6 @@ function hideNoise(){
 hideNoise();
 new MutationObserver(hideNoise).observe(document.body,{childList:true,subtree:true});
 
-openApp('documents');
 window.KEANU_OPEN=(id)=>openApp(id);
 </script>
 </body>
