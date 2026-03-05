@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Site_Collab | Retro Collab Signal</title>
+  <style>
+    :root {
+      --red: #dd1111;
+      --blue: #112a9a;
+      --yellow: #fff6ad;
+      --paper: #eef9df;
+      --border: #0e0e0e;
+      --purple: #b7a9ff;
+      --link: #0023a7;
+      --green: #1d6a2f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: #101010;
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      background:
+        url("https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDF0aW1qNDIwZ2xtNWloZml1cWMwaXFtejE5ZjN5eGk0NTM1aTlhMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/100PgquHm9j3sQ/giphy.gif") center top/130px repeat;
+    }
+
+    .site {
+      width: min(1100px, 96vw);
+      margin: 12px auto;
+      border: 3px solid #000;
+      background: #fff;
+      box-shadow: 0 0 0 2px #fff inset;
+    }
+
+    .header {
+      border-bottom: 3px solid #000;
+      background: linear-gradient(180deg, #fefefe, #dedede);
+      padding: 8px;
+    }
+
+    .brand {
+      border: 2px solid #444;
+      background: var(--red);
+      color: #fff;
+      text-align: center;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+      font-weight: 700;
+      font-size: clamp(22px, 4vw, 36px);
+      padding: 6px;
+      text-shadow: 1px 1px #000;
+    }
+
+    .subbrand {
+      margin-top: 6px;
+      border: 2px solid #666;
+      background: #f4f0bd;
+      text-align: center;
+      font-family: "Times New Roman", Times, serif;
+      font-size: 26px;
+      color: #b30000;
+      font-weight: 700;
+      padding: 6px 10px;
+    }
+
+    .toplinks {
+      margin-top: 6px;
+      border: 2px solid #888;
+      background: #ffffff;
+      text-align: center;
+      padding: 5px;
+      font-size: 20px;
+      font-family: "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .toplinks a {
+      color: var(--link);
+      text-decoration: none;
+      margin: 0 6px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 190px 1fr 190px;
+      gap: 10px;
+      padding: 10px;
+      background: rgba(255, 255, 255, .86);
+    }
+
+    .rail {
+      border: 2px solid var(--border);
+      background: #efefef;
+      display: grid;
+      gap: 4px;
+      align-content: start;
+      padding: 4px;
+    }
+
+    .rail img,
+    .gif-grid img,
+    .center-gifs img {
+      width: 100%;
+      display: block;
+      border: 1px solid #000;
+      background: #fff;
+    }
+
+    .main {
+      border: 2px solid #000;
+      background: #fffbe6;
+      padding: 8px;
+    }
+
+    .langbar {
+      border: 2px inset #777;
+      background: #ecf4ff;
+      padding: 8px;
+      font-size: 14px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      font-family: Tahoma, Verdana, sans-serif;
+      margin-bottom: 8px;
+    }
+
+    select {
+      border: 2px inset #999;
+      font-family: Tahoma, Verdana, sans-serif;
+      font-size: 14px;
+      padding: 3px 6px;
+      background: #fff;
+    }
+
+    .hello {
+      margin: 4px 0 6px;
+      text-align: center;
+      font-family: "Times New Roman", serif;
+      font-size: 48px;
+      color: #cb0000;
+      text-shadow: 2px 2px #fff;
+    }
+
+    .ticker {
+      border: 2px inset #777;
+      background: #fff;
+      padding: 6px;
+      font-family: "Courier New", Courier, monospace;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .intro {
+      border: 2px solid #7a7a7a;
+      background: var(--paper);
+      padding: 10px;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .invite {
+      margin-top: 7px;
+      color: #a30000;
+      font-weight: 700;
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .section {
+      margin-top: 10px;
+      border: 2px solid #000;
+      background: #fff;
+      padding: 9px;
+    }
+
+    .section h2 {
+      margin: 0 0 7px;
+      color: var(--blue);
+      font-size: 34px;
+      line-height: 1;
+      font-family: "Times New Roman", serif;
+    }
+
+    .section ul { margin: 0; padding-left: 22px; }
+    .section li { margin-bottom: 7px; }
+
+    .projects strong {
+      color: var(--green);
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+    }
+
+    .projects a {
+      color: var(--link);
+      font-weight: 700;
+      font-family: "Trebuchet MS", Verdana, sans-serif;
+    }
+
+    .center-gifs {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(90px, 1fr));
+      gap: 6px;
+      border: 2px solid #000;
+      background: #dff3ff;
+      padding: 5px;
+    }
+
+    .footer {
+      margin: 10px;
+      border: 2px outset #646464;
+      background: var(--purple);
+      text-align: center;
+      padding: 7px;
+      font-family: "Times New Roman", serif;
+      font-size: 29px;
+    }
+
+    .footnote {
+      text-align: center;
+      padding: 0 10px 10px;
+      font-size: 12px;
+      font-family: Arial, sans-serif;
+      line-height: 1.3;
+    }
+
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr; }
+      .rail { grid-template-columns: repeat(3, 1fr); }
+      .hello { font-size: 38px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="site">
+    <header class="header">
+      <div class="brand">Site_Collab: Dynamic Executive-Creative 90s Network</div>
+      <div class="subbrand" id="headline"></div>
+      <div class="toplinks">
+        <a href="#" id="nav1"></a>|
+        <a href="#" id="nav2"></a>|
+        <a href="#" id="nav3"></a>|
+        <a href="#" id="nav4"></a>
+      </div>
+    </header>
+
+    <section class="grid">
+      <aside class="rail">
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcjVjaWZ3bGFpejhlbDNoazRhaWdkdXZjbWJod29peDEzY25vbmFoaCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9dHM/u5N9RAqo8dAGZGo0jK/giphy.gif" alt="retro sticker" />
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dnJyY2w0cDU0NDc3enB3dzN4b25kdWJuYnRwaTV2bHY1a2llOWN0MSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/TGKC97DXSijcMlwAjW/giphy.gif" alt="retro sticker" />
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3NzV6c2xnY3F6c2d3bnZsMnhqa3k4M2F2anN4eWplaHlidnpxc2NkcCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/PkSQgkqMqz3NZyyBgy/giphy.gif" alt="retro gif" />
+      </aside>
+
+      <article class="main">
+        <div class="langbar">
+          <label for="lang" id="langLabel"></label>
+          <select id="lang">
+            <option value="es">Español</option>
+            <option value="en" selected>English</option>
+            <option value="pt">Português</option>
+          </select>
+        </div>
+
+        <h1 class="hello" id="hello"></h1>
+        <div class="ticker" id="ticker"></div>
+
+        <section class="intro">
+          <div id="bio"></div>
+          <div class="invite" id="invite"></div>
+        </section>
+
+        <section class="section services">
+          <h2 id="servicesTitle"></h2>
+          <ul id="servicesList"></ul>
+        </section>
+
+        <section class="section projects">
+          <h2 id="collabsTitle"></h2>
+          <ul>
+            <li><a href="https://www.etsy.com/shop/LootApparelBoutique" target="_blank" rel="noopener noreferrer">Loot Apparel Boutique</a> — <strong id="c1Role"></strong> <span id="c1Desc"></span></li>
+            <li><a href="https://amazonicwav.tumblr.com/" target="_blank" rel="noopener noreferrer">AmazoNic Wav</a> — <strong id="c2Role"></strong> <span id="c2Desc"></span></li>
+            <li><a href="https://nexusgenesis.odooconsultores.cl/recepcion" target="_blank" rel="noopener noreferrer">Nexus Genesis / Recepción</a> — <strong id="c3Role"></strong> <span id="c3Desc"></span></li>
+            <li><a href="https://nexusgenesis.odooconsultores.cl/tematicas" target="_blank" rel="noopener noreferrer">Nexus Genesis / Temáticas</a> — <strong id="c4Role"></strong> <span id="c4Desc"></span></li>
+            <li>Wizards SK8 — <strong id="c5Role"></strong> <span id="c5Desc"></span></li>
+          </ul>
+        </section>
+
+        <div class="center-gifs gif-grid">
+          <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3MWQyMHJ2YmtsZDgzM2lsMXd5YTU0dXFnMWt5Yjl5bGN6cndidno0bSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/z3Ecl5aJmqQJrdN5M5/giphy.gif" alt="90s sticker" />
+          <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMmh1MmRzdHB2MHVwdDdsaXdrYXNlaXpjdDV5Y2Yzd3g5Y2FxcnFzOSZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/s99VUdNNp2kzYJDq4B/giphy.gif" alt="90s sticker" />
+          <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3cGRseXByODBwMzJmZXU3N2N0NXp3ZzMwZ2VmdHJxaHZwMm9hYWl2diZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/37Uer6MbSlFgA/giphy.gif" alt="90s sticker" />
+        </div>
+      </article>
+
+      <aside class="rail">
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3ajR2aGRrMm4wbmwzMjh5cThrc2p4a3M3ZnBic3ZnZ2xpMGxmNTR3aiZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/ZbQ6C34PmI9n7ETkbm/giphy.gif" alt="retro sticker" />
+        <img src="https://media.giphy.com/media/v1.Y2lkPWVjZjA1ZTQ3dTc4ZjUwdjd6OTE0dHRsMXRsZmo1c3dwNWNid24wNG4zZWNxcGk3cyZlcD12MV9naWZzX3NlYXJjaCZjdD1n/NjPEDD7S9Jssw/giphy.gif" alt="retro gif" />
+        <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExcDF0aW1qNDIwZ2xtNWloZml1cWMwaXFtejE5ZjN5eGk0NTM1aTlhMiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/100PgquHm9j3sQ/giphy.gif" alt="retro gif" />
+      </aside>
+    </section>
+
+    <footer>
+      <div class="footer" id="footerTitle"></div>
+      <div class="footnote" id="footer"></div>
+    </footer>
+  </main>
+
+  <script>
+    const i18n = {
+      en: {
+        headline: 'Have a Collaboration? Just type it in and click Ask!',
+        nav1: 'Free',
+        nav2: 'Gallery',
+        nav3: 'Documentation',
+        nav4: 'Contact',
+        langLabel: 'Website language:',
+        hello: 'Hello world!',
+        ticker: 'Innovation + web3 + art + culture + events :: Creative Executive Collaboration Board',
+        bio: 'I am keanucheese, a modern polymath — chef, poet, and skater in real life.',
+        invite: 'I invite you to collaborate on projects focused on innovation, community, and hybrid IRL/URL experiences.',
+        servicesTitle: 'View services',
+        services: ['Webs', 'Discord servers', 'Research innovation', 'Art & Design'],
+        collabsTitle: 'These are the collabs delivered',
+        c1Role: 'research and desing | USA.',
+        c1Desc: 'Trend research + visual design for apparel narrative and storefront direction.',
+        c2Role: 'user exp and video | worldwide.',
+        c2Desc: 'User experience curation and audiovisual editorial execution with global reach.',
+        c3Role: 'IRL Comunity | Neo-Medieval.',
+        c3Desc: 'In-person community activation, thematic framing, and cultural program support.',
+        c4Role: 'IRL/URL Comunity and innovation | Solarpunk.',
+        c4Desc: 'Physical + digital community bridge through participatory innovation dynamics.',
+        c5Role: 'IRL Comunity | Skateboarding.',
+        c5Desc: 'Skate community development, sessions activation, and local scene energy.',
+        footerTitle: 'Copyright © 1999-20XX by Keanucheese. All rights reserved.',
+        footer: 'SITE_COLLAB, logos, and creative marks are service marks of Keanucheese. Other brands belong to their owners.'
+      },
+      es: {
+        headline: '¿Tienes una colaboración? ¡Escríbela y dale a Ask!',
+        nav1: 'Gratis',
+        nav2: 'Galería',
+        nav3: 'Documentación',
+        nav4: 'Contacto',
+        langLabel: 'Idioma de la web:',
+        hello: '¡Hola mundo!',
+        ticker: 'Innovación + web3 + arte + cultura + eventos :: Creative Executive Collaboration Board',
+        bio: 'Soy keanucheese, un polímata moderno — chef, poeta y skater en la vida real.',
+        invite: 'Te invito a colaborar en proyectos de innovación, comunidad y experiencias híbridas IRL/URL.',
+        servicesTitle: 'Ver servicios',
+        services: ['Webs', 'Servidores de Discord', 'Research innovation', 'Art & Design'],
+        collabsTitle: 'Estas son las collabs realizadas',
+        c1Role: 'research and desing | USA.',
+        c1Desc: 'Investigación de tendencias + diseño visual para narrativa de apparel y dirección de tienda.',
+        c2Role: 'user exp and video | worldwide.',
+        c2Desc: 'Curaduría de experiencia de usuario y ejecución audiovisual editorial de alcance global.',
+        c3Role: 'IRL Comunity | Neo-Medieval.',
+        c3Desc: 'Activación de comunidad presencial, marco temático y soporte de programación cultural.',
+        c4Role: 'IRL/URL Comunity and innovation | Solarpunk.',
+        c4Desc: 'Puente entre comunidad física y digital con dinámicas de innovación participativa.',
+        c5Role: 'IRL Comunity | Skateboarding.',
+        c5Desc: 'Desarrollo de comunidad skate, activación de sesiones y energía de escena local.',
+        footerTitle: 'Copyright © 1999-20XX por Keanucheese. Todos los derechos reservados.',
+        footer: 'SITE_COLLAB, logos y marcas creativas son marcas de servicio de Keanucheese. Otras marcas pertenecen a sus dueños.'
+      },
+      pt: {
+        headline: 'Tem uma colaboração? Escreva e clique em Ask!',
+        nav1: 'Grátis',
+        nav2: 'Galeria',
+        nav3: 'Documentação',
+        nav4: 'Contato',
+        langLabel: 'Idioma do site:',
+        hello: 'Olá mundo!',
+        ticker: 'Inovação + web3 + arte + cultura + eventos :: Creative Executive Collaboration Board',
+        bio: 'Sou keanucheese, um polímata moderno — chef, poeta e skatista na vida real.',
+        invite: 'Convido você para colaborar em projetos de inovação, comunidade e experiências híbridas IRL/URL.',
+        servicesTitle: 'Ver serviços',
+        services: ['Webs', 'Servidores de Discord', 'Research innovation', 'Art & Design'],
+        collabsTitle: 'Estas são as collabs realizadas',
+        c1Role: 'research and desing | USA.',
+        c1Desc: 'Pesquisa de tendências + design visual para narrativa de apparel e direção da loja.',
+        c2Role: 'user exp and video | worldwide.',
+        c2Desc: 'Curadoria de experiência do usuário e execução audiovisual editorial com alcance global.',
+        c3Role: 'IRL Comunity | Neo-Medieval.',
+        c3Desc: 'Ativação de comunidade presencial, enquadramento temático e apoio de programação cultural.',
+        c4Role: 'IRL/URL Comunity and innovation | Solarpunk.',
+        c4Desc: 'Ponte entre comunidade física e digital com dinâmicas de inovação participativa.',
+        c5Role: 'IRL Comunity | Skateboarding.',
+        c5Desc: 'Desenvolvimento de comunidade skate, ativação de sessões e energia da cena local.',
+        footerTitle: 'Copyright © 1999-20XX por Keanucheese. Todos os direitos reservados.',
+        footer: 'SITE_COLLAB, logos e marcas criativas são marcas de serviço de Keanucheese. Outras marcas pertencem aos seus proprietários.'
+      }
+    };
+
+    const ids = ['headline','nav1','nav2','nav3','nav4','langLabel','hello','ticker','bio','invite','servicesTitle','collabsTitle','c1Role','c1Desc','c2Role','c2Desc','c3Role','c3Desc','c4Role','c4Desc','c5Role','c5Desc','footerTitle','footer'];
+    const langEl = document.getElementById('lang');
+
+    function render(lang) {
+      const t = i18n[lang] || i18n.en;
+      ids.forEach((id) => { document.getElementById(id).textContent = t[id]; });
+
+      const list = document.getElementById('servicesList');
+      list.innerHTML = '';
+      t.services.forEach((item) => {
+        const li = document.createElement('li');
+        li.textContent = item;
+        list.appendChild(li);
+      });
+
+      document.documentElement.lang = lang;
+    }
+
+    langEl.addEventListener('change', (e) => render(e.target.value));
+    render('en');
+  </script>
+</body>
+</html>
